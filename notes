@@ -1,0 +1,60 @@
+3 different filters
+
+Ownership
+Job TYPE
+Job STATUS
+
+
+if job status is checked then check the value, and show those on the map 
+
+check what filters have been checked 
+if job status is checked alone then run the job status function
+if job type is checked alone then run the job type function 
+if job status and job type are checked then run the combined function 
+
+when someone clicks one filter it applies that, but if they click another
+it also applies that on top of the previous filter, but we need to clear the
+previous one and just run the double one
+
+
+filter function 
+    check if job status has been checked 
+        if it has then run job status function 
+        else
+    check if job type has been checked 
+        if it has then run job type function 
+        else
+    check if ownership has been checked 
+        if it has then run ownership function   
+        else
+    check if job status and job type have been checked
+        if they have then run combined function?
+        else
+    check if job status and ownership have been checked 
+        if they have then run combined function?
+        else
+    check if job type and ownership have been checked 
+        if they have then run combined function?
+        else
+    check if job type ownership and job status have been checked
+        if they have then run combined function?
+        else
+
+ownership layer
+job status layer
+job type layer
+ownership and job status layer
+ownership and job type layer
+job status and job type layer
+ownership job status and job type layer
+
+
+function 1
+    check if job status was clicked
+        return job status value
+    check if job type was clicked
+        return job type value
+    check if ownership was clicked
+        return ownership value
+
+draw markers based on function 1
