@@ -1,9 +1,15 @@
-body{
-    font-size: 12px;
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    padding: 1em;
+    }
+h1{
+    font-size: 40px;
+    margin: auto;
 }
 
 #map { 
-    height: 600px; 
+    height: 500px; 
     width: 100%;
     z-index: 1;
 }
@@ -13,7 +19,19 @@ body{
 
 .grid-container {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 2fr .5fr;
     grid-gap: 10px;
     
+}
+#note{
+    font-size: 10px;
+}
+#bottom{
+    font-size: 10px;
+}
+.title{
+    text-align: left;
+}
+#btn{
+    font-size: 10px;
 }
