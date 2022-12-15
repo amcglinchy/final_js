@@ -58,3 +58,19 @@ function 1
         return ownership value
 
 draw markers based on function 1
+
+
+
+if row.ownership === filterValue{
+    add markers to ownership marker cluster
+    add ownership marker cluster to map
+}
+if row.jobstatus === filterValue{
+
+    add markers to jobstatus marker cluster
+    if markers in jobstatus marker are in ownership marker cluster
+    remove ownership marker cluster 
+    add those specific markers of ownership marker cluster to map
+}
+
+if markers in ownership marker cluster == markers in jobsstatus marker cluster

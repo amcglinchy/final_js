@@ -11,13 +11,29 @@
    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
    integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
    crossorigin=""></script>
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;800&display=swap" rel="stylesheet">
   </head>
   <body>
+    <div class="title">
     <h1>NYC Residential Building Jobs</h1>
+        <p>
+            Explore all Department of Buildings (DOB)-approved housing jobs in NYC since January 1, 2010. 
+        </p>
+    </div>
 
     <div class = "grid-container">
         <div class ="grid-child1">
             <div id="map"></div>
+            <div id ="bottom">
+                <p>
+                    Data from The Department of City Planning (DCP) Housing Database. DCP does not warranty the completeness, accuracy, content, or fitness for any particular purpose or use of the Database.
+                </p>
+                <p>
+                    Date of underlying data: December 31, 2020.
+                </p>
+            </div>
         </div>
 
         <div class ="grid-child2">
@@ -31,34 +47,30 @@
 <br>
 <br>
             <p>Job Status:</p>
-                <input type="radio" id="filed" name="jobStatus" value="filed">
-                <label for="filed">Filed Application</label><br>
-                <input type="radio" id="approved" name="jobStatus" value="approved">
-                <label for="approved">Approved Application</label><br>
-                <input type="radio" id="permitted" name="jobStatus" value="permitted">
-                <label for="permitted">Permitted for Construction</label><br>
-                <input type="radio" id="partial" name="jobStatus" value="partial">
-                <label for="partial">Partially Completed Construction</label><br>
+                <input type="radio" id="incomplete" name="jobStatus" value="incomplete">
+                <label for="incomplete">Incomplete</label><br>
                 <input type="radio" id="completed" name="jobStatus" value="completed">
                 <label for="completed">Completed Construction</label>
-            
 <br>
 <br>
-                <p>Job Type:</p>
+<button id="btn">Clear</button>
+<br>
+<p id="note">* Incomplete includes Filed Applications, Approved Applications, Permitted for Construction and Partial Completion of Construction.</p>
+                <!-- <p>Job Type:</p>
                 <input type="radio" id="alt" name="jobType" value="alt">
                 <label for="alt">Alteration</label><br>
                 <input type="radio" id="nb" name="jobType" value="nb">
                 <label for="nb">New Building</label><br>
                 <input type="radio" id="demo" name="jobType" value="demo">
-                <label for="demo">Demolition</label>
+                <label for="demo">Demolition</label> -->
         </div>
     </div>
       
 
-      <div id ="neighborhoods"></div>
+
     <script src="./d3.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
-    <script src="script2.js"></script>
+    <script src="script3.js"></script>
   </body>
 </html>

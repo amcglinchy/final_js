@@ -37,6 +37,7 @@ let compFilter = '5. Completed Construction'
 
 let row;
 
+// let marker = [];
 let marker;
 let markerO, markerJS;
 
@@ -48,6 +49,13 @@ let markerO, markerJS;
 //     };
     
 // });
+
+let layerOwner = L.layerGroup();
+let markersOcluster = new L.layerGroup();
+let markersJScluster = new L.layerGroup();
+
+
+
 
 
 let dataParse = function(filterValue){
@@ -63,24 +71,46 @@ let dataParse = function(filterValue){
             color: "black"}).bindPopup(row.AddressNum + " " + row.AddressSt +"<br>" +row.Ownership+"<br>" +row.Job_Status);
             if (row.Ownership === filterValue){
                 // state.filter.jobO = filterValue
-                markerO = marker
-                markerO.addTo(myMap);
+                // markerO = marker
+                // markerO.addTo(myMap);
+                markersOcluster.addLayer(marker);
+                // markersOcluster.eachLayer(function(mark){
+
+
+                // )}
+                // myMap.addLayer(markersOcluster);
+                // console.log(markersOcluster);
             }
-            else if(row.Job_Status === filterValue){
+            if(row.Job_Status === filterValue){
                 // state.filter.jobS = filterValue
-                markerJS = marker
-                if (markerJS == markerO){
-                    // markerO.addTo(myMap);
-                }
-                else{
-                    markerO.removeLayer(myMap);
-                }
+                markersJScluster.addLayer(marker);
+                // for (let i in markersOcluster){
+                //     let markerO = markersOcluster[i]
+                //     if (markerO ) 
+                //     // myMap.addLayer(markersJScluster);
+                // }
+                // else{
+                //     myMap.removeLayer(markersOcluster);
+                // }
+                // if (markerO != markerJS){
+                //     myMap.removeLayer(markerO);
+                // }
+                // else {
+                // }
                 
             }
-            else if (row.Job_Type === filterValue){
-                // state.filter.jobT = filterValue
-                marker.addTo(myMap);
-            }
+
+            // if(cluster.hasLayer(marker)){
+            //     cluster.removeLayer(marker);
+            // } 
+            // if(map.hasLayer(marker)){
+            //     map.removeLayer(marker);
+            // }
+
+            // else if (row.Job_Type === filterValue){
+            //     // state.filter.jobT = filterValue
+            //     marker.addTo(myMap);
+            // }
             // if ((row.Ownership === (filterValueO)) && (row.Job_Status != filterValueJS) && (row.Job_Type != filterValueJT)){
             //         marker.addTo(myMap);
             // } // ownership
