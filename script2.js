@@ -1,3 +1,13 @@
+let state = {
+    json: [],
+    filter: {
+        name: null,
+        jobO: null,
+        jobS: null,
+        jobT: null
+    }
+};
+
 let myMap;
 myMap = L.map("map");
 
@@ -25,28 +35,50 @@ let permitFilter = "3. Permitted for Construction"
 let partFilter = "4. Partially Completed Construction"
 let compFilter = '5. Completed Construction'
 
-let data;
+let row;
 
 let marker;
+let markerO, markerJS;
 
-let dataParse = function(filterValueO, filterValueJS, filterValueJT){
+// $.get('./HousingDB_post2010.csv', function(csvString) {
+//     state.json = Papa.parse(csvString, {header: true, dynamicTyping: true}).data;
+//     // console.log(state.json);
+//     for (let i in state.json) {
+//         row = state.json[i];
+//     };
+    
+// });
+
+
+let dataParse = function(filterValue){
     $.get('./HousingDB_post2010.csv', function(csvString) {
-        data = Papa.parse(csvString, {header: true, dynamicTyping: true}).data;
+        state.json = Papa.parse(csvString, {header: true, dynamicTyping: true}).data;
         // console.log("data",data);
-        for (let i in data) {
-            let row = data[i];
+        for (let i in state.json) {
+            let row = state.json[i];
+            // console.log("here",state.json);
             marker = L.circleMarker([row.Latitude, row.Longitude], 
                 {radius: 5, 
                 opacity: 1,
             color: "black"}).bindPopup(row.AddressNum + " " + row.AddressSt +"<br>" +row.Ownership+"<br>" +row.Job_Status);
-            
-            if (row.Ownership === filterValueO){
-                marker.addTo(myMap);
+            if (row.Ownership === filterValue){
+                // state.filter.jobO = filterValue
+                markerO = marker
+                markerO.addTo(myMap);
             }
-            else if(row.Job_Status === filterValueJS){
-                marker.addTo(myMap);
+            else if(row.Job_Status === filterValue){
+                // state.filter.jobS = filterValue
+                markerJS = marker
+                if (markerJS == markerO){
+                    // markerO.addTo(myMap);
+                }
+                else{
+                    markerO.removeLayer(myMap);
+                }
+                
             }
-            else if (row.Job_Type === filterValueJT){
+            else if (row.Job_Type === filterValue){
+                // state.filter.jobT = filterValue
                 marker.addTo(myMap);
             }
             // if ((row.Ownership === (filterValueO)) && (row.Job_Status != filterValueJS) && (row.Job_Type != filterValueJT)){
@@ -78,6 +110,7 @@ let dataParse = function(filterValueO, filterValueJS, filterValueJT){
                 //     marker.addTo(myMap);
                 // }
             }
+
         });
     };
 
@@ -178,41 +211,43 @@ let dataParse = function(filterValueO, filterValueJS, filterValueJT){
         let radioJobTypeValue = $("input[name='jobType']:checked").val();
 
         if(radioOwnerValue == "PNP"){
-            dataParse(pnpFilter, null, null)
+            dataParse(pnpFilter)
         }
         else if (radioOwnerValue == "PFP"){
-            dataParse(pfpFilter, null, null)
+            dataParse(pfpFilter)
         }
         else if (radioOwnerValue == "GOV"){
-            dataParse(govFilter, null, null)
+            dataParse(govFilter)
         };
     
         if(radioJobStatusValue == "filed"){
-            dataParse(null,filFilter,null)
+            dataParse(filFilter)
         }
         else if (radioJobStatusValue == "approved"){
-            dataParse(null,appFilter,null)
+            dataParse(appFilter)
         }
         else if (radioJobStatusValue == "permitted"){
-            dataParse(null,permitFilter,null)
+            dataParse(permitFilter)
         }
         else if (radioJobStatusValue == "partial"){
-            dataParse(null,partFilter,null)
+            dataParse(partFilter)
         }
         else if (radioJobStatusValue == "completed"){
-            dataParse(null,compFilter,null)
+            dataParse(compFilter)
         };
     
         if(radioJobTypeValue == "alt"){
-            dataParse(null,null,"Alteration")
+            dataParse("Alteration")
         }
         else if (radioJobTypeValue == "nb"){
-            dataParse(null,null,"New Building")
+            dataParse("New Building")
         }
         else if (radioJobTypeValue == "demo"){
-            dataParse(null,null,"Demolition")
+            dataParse("Demolition")
         };
     });
+
+    console.log(state);
 
     //     if((radioOwnerValue == "PNP") && (radioJobStatusValue == "filed")){
     //         dataParse(pnpFilter,filFilter,null)
@@ -262,28 +297,28 @@ let dataParse = function(filterValueO, filterValueJS, filterValueJT){
     
     // $('input[type=radio][name=ownership]').change(function() {
     //     if (this.value == 'PNP') {
-    //         dataParse(pnpFilter, null, null)
+    //         dataParse(pnpFilter)
     //     }
     //     else if (this.value == 'PFP') {
-    //         dataParse(pfpFilter, null, null)
+    //         dataParse(pfpFilter)
     //     }
     //     else if (this.value == 'GOV') {
-    //         dataParse(govFilter, null, null)
+    //         dataParse(govFilter)
     //     }
     // });
 
 //     $('input[type=radio][name=ownership]').change(function() {
 //         switch($(this).val()) {
 //             case 'PNP':
-//                 dataParse(pnpFilter, null, null);
+//                 dataParse(pnpFilter);
 //                 break;
 //             case 'PFP':
 //                 myMap.removeLayer(marker1);
-//                 dataParse(pfpFilter, null, null);
+//                 dataParse(pfpFilter);
 //                 break;
 //             case 'GOV':
 //                 myMap.removeLayer(marker1);
-//                 dataParse(govFilter, null, null)
+//                 dataParse(govFilter)
 //                 break;
 //         }            
 //     });
